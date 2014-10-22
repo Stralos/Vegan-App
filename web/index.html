@@ -16,15 +16,49 @@
     		padding-left: 100px;
   			padding-right: 100px;
   			}
-  			@media (max-width: 980px) {
-    		#content {
-      			padding-left: 60px;
-  				padding-right: 60px;
-    		}
-  			#introduction{
-				style="text-align:initial"
+			@media (max-width: @screen-xs-max) {
+				#content {
+					background-color: #00ff00;
+					padding-left: 10px;
+					padding-right: 10px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+				#introduction{
+					style="text-align:initial"
+				}
+				.img-responsive {  display: block;  height: auto;  max-width: 40%; min-width: 20%;}
 			}
+			@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
 			}
+  			@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+				#content {
+					background-color: #55ff00;
+					padding-left: 80px;
+					padding-right: 80px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+				#introduction{
+					style="text-align:initial"
+				}
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
+			}
+			
+			@media (min-width: @screen-lg-min) {
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
+			
+			}
+			#content {
+					background-color: #55ff00;
+					padding-left: 80px;
+					padding-right: 80px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+			
+			
 		  .navbar-nav{text-align:center;}
 		  #header{
     		width:100%;
@@ -70,7 +104,7 @@
 			<div class ="rows"id="introduction">
 				<div class="col-xs-12">
 					<p>
-					<img src="1.png" align="right" width="320" height="320">
+					<img src="1.png" align="right" class="img-responsive">
 						Applikacija tures meniu, susidedanti is icon'eliu, kurios vaizduos ivairias maisto grupes:
 						<ul>
 							<li>Pupeles</li>
@@ -84,7 +118,7 @@
 			<div class="rows">
 			<div class="col-xs-12">
 					<p>
-						<img src="4.png" align="right" width="320" height="320">
+						<img src="4.png" align="right" class="img-responsive">
 						Paspaudus ant icon'eles vartotojas bus perkeltas i kita langa, kur ji pasitiks sarasas receptu su tuom 'tagu'. Kiekvienas receptas tures paveiksliuka ir smulku aprasa
 					</p>
 				</div>
@@ -92,7 +126,7 @@
 			<div class="rows">
 				<div class="col-xs-12">
 					<p>
-						<img src="3.png" align="right" width="320" height="320">
+						<img src="3.png" align="right" class="img-responsive">
 						Pasirinkes recepta vartotojas atsidurs treciame lange, kuriame jo lauks receptas:
 						<ul>
 							<li>Ingridientai</li>
@@ -105,7 +139,7 @@
 			<div class="rows">
 				<div class="col-xs-12">
 					<p>
-						<img src="2.png" align="right" width="320" height="320">
+						<img src="2.png" align="right" class="img-responsive">
 						Receptus, kurie atrodys patrauklus, vartotojas gales issisaugoti.
 					</p>
 				</div>
