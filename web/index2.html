@@ -1,164 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Heroic Features - Start Bootstrap Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/heroic-features.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Jumbotron Header -->
-        <header class="jumbotron hero-spacer">
-            <h1>A Warm Welcome!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-            <p><a class="btn btn-primary btn-large">Call to action!</a>
-            </p>
-        </header>
-
-        <hr>
-
-        <!-- Title -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Features</h3>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Page Features -->
-        <div class="row text-center">
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-
-    <!-- jQuery Version 1.11.0 -->
-    <script src="js/jquery-1.11.0.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<style>
+			#introduction{
+				style="text-align:center"
+			}
+			body{
+				background-color:lightgray;
+			}
+			#content {
+    		padding-left: 100px;
+  			padding-right: 100px;
+  			}
+			@media (max-width: @screen-xs-max) {
+				#content {
+					background-color: #00ff00;
+					padding-left: 10px;
+					padding-right: 10px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+				#introduction{
+					style="text-align:initial"
+				}
+				.img-responsive {  display: block;  height: auto;  max-width: 40%; min-width: 20%;}
+			}
+			@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
+			}
+  			@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+				#content {
+					background-color: #55ff00;
+					padding-left: 80px;
+					padding-right: 80px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+				#introduction{
+					style="text-align:initial"
+				}
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
+			}
+			
+			@media (min-width: @screen-lg-min) {
+				.img-responsive {  display: block;  height: auto;  max-width: 50%; min-width: 20%;}
+			
+			}
+			#content {
+					background-color: #55ff00;
+					padding-left: 80px;
+					padding-right: 80px;
+					margin-right: auto;
+					margin-left: auto;
+				}
+			
+			
+		  .navbar-nav{text-align:center;}
+		  #header{
+    		width:100%;
+    		text-align:center;
+			}
+	</style>
+  </head>
+  <body>
+  	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  		<div class="container">
+    		<div class="navbar-header">
+      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+        			<span class="icon-bar"></span>
+      			</button>
+    		</div>
+    	<div class="collapse navbar-collapse center" id="bs-example-navbar-collapse-1">
+      		<ul class="nav navbar-nav">
+        		<li><a href="#">Home</a></li>
+        		<li class="disabled"><a href="#">Contact us</a></li>
+        		<li class="disabled"><a href="#">Download</a></li>
+      		</ul>
+    	</div>
+  		</div>
+	</nav>
+	<div class="container" id="content">
+			<div id="header">
+        		<img src="vegan_red_logo.png"/>    
+    		</div>
+			<h1 style="text-align:center">
+				<FONT FACE="algerian"><b>Kas tai yra ?</b></FONT>
+			</h1>
+			<div id="introduction">
+				<p>
+					Applikacija taikoma i lietuvos rinka skatinanti veganizma. <br>
+					Applikacija tures informacijos apie ivairius receptus, kuriuos nesunkiai gales pasigaminti betkoks skaityti mokantis lietuvos pilietis.
+				</p>
+			</div>
+			<h1 style="text-align:center">
+				<FONT FACE="algerian"><b>Kaip ji veiks ?</b></FONT>
+			</h1>
+			<div class ="rows"id="introduction">
+				<div class="col-xs-12">
+					<p>
+					<img src="1.png" align="right" class="img-responsive">
+						Applikacija tures meniu, susidedanti is icon'eliu, kurios vaizduos ivairias maisto grupes:
+						<ul>
+							<li>Pupeles</li>
+							<li>Lesiai</li>
+							<li>Makaronai</li>
+							<li>t.t.</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+			<div class="rows">
+			<div class="col-xs-12">
+					<p>
+						<img src="4.png" align="right" class="img-responsive">
+						Paspaudus ant icon'eles vartotojas bus perkeltas i kita langa, kur ji pasitiks sarasas receptu su tuom 'tagu'. Kiekvienas receptas tures paveiksliuka ir smulku aprasa
+					</p>
+				</div>
+			</div>
+			<div class="rows">
+				<div class="col-xs-12">
+					<p>
+						<img src="3.png" align="right" class="img-responsive">
+						Pasirinkes recepta vartotojas atsidurs treciame lange, kuriame jo lauks receptas:
+						<ul>
+							<li>Ingridientai</li>
+							<li>Kaip paruosti one on one</li>
+							<li>Maistingumas (kalorijos, angliavandeniai ir t.t.)</li>
+						<ul>
+					</p>
+				</div>
+			</div>
+			<div class="rows">
+				<div class="col-xs-12">
+					<p>
+						<img src="2.png" align="right" class="img-responsive">
+						Receptus, kurie atrodys patrauklus, vartotojas gales issisaugoti.
+					</p>
+				</div>
+			</div>
+	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-
 </body>
-
 </html>
