@@ -3,12 +3,13 @@
     package="vegan.paki.mapa.mif.veganapp" >
 
     <application
+        android:name=".VeganApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="vegan.paki.mapa.mif.veganapp.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
