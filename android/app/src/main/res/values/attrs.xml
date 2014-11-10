@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="title_text" format="color" />
+    <attr name="body_text" format="color" />
+    <attr name="selection_text" format="color" />
+    <attr name="drawer_background" format="color" />
+    <attr name="empty_text" format="color" />
+    <attr name="inset_divider" format="color" />
+
+    <attr name="menu_selector" format="reference" />
+    <attr name="list_selector" format="reference" />
+
+    <declare-styleable name="BaseTheme">
+        <attr name="actionBarIconColor" format="color" />
+        <attr name="actionBarInsetStart" format="dimension" />
+        <attr name="spinnerBarInsetStart" format="dimension" />
+        <attr name="popupItemBackground" format="reference" />
+        <attr name="photoItemForeground" format="reference" />
+        <attr name="photoItemForegroundBorderless" format="reference" />
+    </declare-styleable>
+
+</resources>

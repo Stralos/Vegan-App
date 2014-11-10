@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import vegan.paki.mapa.mif.veganapp.R;
@@ -19,7 +18,7 @@ import vegan.paki.mapa.mif.veganapp.ui.adapter.PostAdapter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlogFragment extends Fragment {
+public class BlogFragment extends Fragment implements NavigationFragment {
 
     private List<Post> postList;
 
@@ -55,4 +54,13 @@ public class BlogFragment extends Fragment {
     }
 
 
+    @Override
+    public int getTitleResId() {
+        return R.string.blog_title;
+    }
+
+    @Override
+    public int getIconResId() {
+        return 0;
+    }
 }
