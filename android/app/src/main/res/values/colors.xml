@@ -2,16 +2,18 @@
 <resources>
 
     <!-- START APP Theme colors -->
-    <color name="vegan_color">#4e6cef</color>
-    <color name="vegan_color_darker">#455ede</color>
-    <color name="vegan_accent_color_lighter">#f06292</color>
-    <color name="vegan_accent_color">#e91e63</color>
-    <color name="vegan_accent_color_darker">#d81b60</color>
+    <color name="vegan_color">#4CAF50</color>
+    <color name="vegan_color_darker">#1B5E20</color>
+    <color name="vegan_accent_color_lighter">#CDDC39</color>
+    <color name="vegan_accent_color">#FFC107</color>
+    <color name="vegan_accent_color_darker">#FF9800</color>
     <color name="vegan_gray">#757575</color>
     <color name="vegan_gray_darker">#616161</color>
 
     <color name="drawer_background">#fff</color>
     <color name="button_disabled">#ddd</color>
+    <color name="post_color">#fff</color>
+
 
     <!-- END APP Theme colors -->
 

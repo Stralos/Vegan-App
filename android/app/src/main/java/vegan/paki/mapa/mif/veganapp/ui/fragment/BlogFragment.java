@@ -3,16 +3,24 @@ package vegan.paki.mapa.mif.veganapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscription;
+import rx.functions.Action1;
+import rx.subscriptions.Subscriptions;
 import vegan.paki.mapa.mif.veganapp.R;
-import vegan.paki.mapa.mif.veganapp.core.model.Post;
+import vegan.paki.mapa.mif.veganapp.RxParseManager;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.PostDTO;
+import vegan.paki.mapa.mif.veganapp.ui.activity.MainActivity;
 import vegan.paki.mapa.mif.veganapp.ui.adapter.PostAdapter;
 
 /**
@@ -20,39 +28,60 @@ import vegan.paki.mapa.mif.veganapp.ui.adapter.PostAdapter;
  */
 public class BlogFragment extends Fragment implements NavigationFragment {
 
-    private List<Post> postList;
-
-    public BlogFragment() {
-        // Required empty public constructor
-    }
-
-    private void fillArray(){
-        postList = new ArrayList<Post>();
-        postList.add(new Post("SOMETHING","Potato", R.drawable.ic_launcher ));
-        postList.add(new Post("SOMETHING","Potato2", R.drawable.ic_launcher));
-        postList.add(new Post("SOMETHING","Potato3", R.drawable.ic_launcher));
-        postList.add(new Post("SOMETHING","Potato4", R.drawable.ic_launcher));
-
-    }
-
+    private RecyclerView mRecyclerView;
+    private PostAdapter mPostAdapter;
+    private List<PostDTO> mPosts = new ArrayList<PostDTO>();
+    private Subscription mPostSubscription = Subscriptions.empty();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fillArray();
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blog, container, false);
+        View view = inflater.inflate(R.layout.fragment_blog, container, false);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.post_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mPostAdapter = new PostAdapter(mPosts, new PostAdapter.ClickListener() {
+            @Override
+            public void onClick(int index) {
+                if (getActivity() instanceof MainActivity) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("objectId", mPosts.get(index).getObjectId());
+                    PostFragment postFragment = new PostFragment();
+                    postFragment.setArguments(bundle);
+                    ((MainActivity) getActivity()).switchFragment(postFragment, false);
+                }
+            }
+
+            @Override
+            public boolean onLongClick(int index) {
+                return false;
+            }
+        });
+        mRecyclerView.setAdapter(mPostAdapter);
+
+        mPostSubscription = requestPosts();
+
+        return view;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        ListView ls = (ListView) view.findViewById(R.id.post_list_view);
-        PostAdapter postAdapter = new PostAdapter(this.getActivity(), postList);
-        ls.setAdapter(postAdapter);
+    public void onDestroyView() {
+        mPostSubscription.unsubscribe();
+        super.onDestroyView();
     }
 
+    private Subscription requestPosts() {
+        ParseQuery<PostDTO> query = ParseQuery.getQuery(PostDTO.class);
+        return RxParseManager.getInstance().find(query).subscribe(new Action1<List<PostDTO>>() {
+            @Override
+            public void call(List<PostDTO> postDTOs) {
+                mPosts = postDTOs;
+                if (mPostAdapter != null) {
+                    mPostAdapter.set(mPosts);
+                }
+            }
+        });
+    }
 
     @Override
     public int getTitleResId() {

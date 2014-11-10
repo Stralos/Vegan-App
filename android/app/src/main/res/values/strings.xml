@@ -15,5 +15,6 @@
     <string name="error">Error</string>
     <string name="sliding_title">Sliding</string>
     <string name="blog_title">Blog/News</string>
+    <string name="image_content_description">imageContentDescription</string>
 
 </resources>

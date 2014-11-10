@@ -1,5 +1,6 @@
 package vegan.paki.mapa.mif.veganapp.ui.activity;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -49,6 +50,13 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else getFragmentManager().popBackStack();
+    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -57,8 +65,19 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
             fragment = mFragments.get(position);
         } catch (Exception e) {}
 
+        switchFragment(fragment, true);
+    }
+
+    public void switchFragment(Fragment fragment, boolean clearBackStack) {
+        if (clearBackStack)
+            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        transaction.commit();
+        if (!clearBackStack) transaction.addToBackStack(null);
+        try {
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

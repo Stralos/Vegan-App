@@ -6,8 +6,11 @@ import android.content.Context;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import timber.log.Timber;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.PostDTO;
 import vegan.paki.mapa.mif.veganapp.util.RxImageLoader;
 
 /**
@@ -56,31 +59,12 @@ public class VeganApplication extends Application {
 
 
         RxImageLoader.init(imageLoaderConfig.build());
-       /* RxParseManager.getInstance().init(this);
+        RxParseManager.getInstance().init(this);
 
-        ParseObject.registerSubclass(OptionCodeDTO.class);
-        ParseObject.registerSubclass(WMIDTO.class);
-        ParseObject.registerSubclass(EnginesDTO.class);
-        ParseObject.registerSubclass(TroubleCodeDTO.class);
-        ParseObject.registerSubclass(VehicleDTO.class);
-        ParseObject.registerSubclass(ControlUnitDTO.class);
-        ParseObject.registerSubclass(AppDTO.class);
-        ParseObject.registerSubclass(AppCommandDTO.class);
-        ParseObject.registerSubclass(AppCommandDTO.AppCommandValueDTO.class);
-        ParseObject.registerSubclass(MeasurementDTO.class);
-        ParseObject.registerSubclass(MeasurementCommandDTO.class);
-        ParseObject.registerSubclass(MeasurementCommandDTO.MeasurementCommandValueDTO.class);
-        ParseObject.registerSubclass(MeasCodeDTO.class);
-        ParseObject.registerSubclass(MeasStructureDTO.class);
-        ParseObject.registerSubclass(MyVehicleDTO.class);
-        ParseObject.registerSubclass(ManualDTO.class);
-        ParseObject.registerSubclass(ManualStepDTO.class);
-        //Parse.enableLocalDatastore(this);
-        Parse.initialize(this, Constants.Key.KEY_7.get(), Constants.Key.KEY_6.get());
+        ParseObject.registerSubclass(PostDTO.class);
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "juQPiQJ3E9A4gVg69BjT7X0xfDwLeaTtyByOIhcf", "75lGmleK7sguI67H8XqimcwmACvkHN6hP91d9fwj");
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
-
-        ParseFacebookUtils.initialize(Constants.Key.KEY_4.get());
-        ParseTwitterUtils.initialize(Constants.Key.KEY_2.get(),Constants.Key.KEY_3.get());*/
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
