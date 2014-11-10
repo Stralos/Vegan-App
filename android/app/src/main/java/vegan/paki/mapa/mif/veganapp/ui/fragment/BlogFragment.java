@@ -26,7 +26,7 @@ import vegan.paki.mapa.mif.veganapp.ui.adapter.PostAdapter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlogFragment extends Fragment implements NavigationFragment {
+public class BlogFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
@@ -79,14 +79,23 @@ public class BlogFragment extends Fragment implements NavigationFragment {
         });
         mRecyclerView.setAdapter(mPostAdapter);
 
-        mPostSubscription = requestPosts();
-
         return view;
     }
 
     @Override
-    public void onDestroyView() {
+    public void onResume() {
+        super.onResume();
+        mPostSubscription = requestPosts();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
         mPostSubscription.unsubscribe();
+    }
+
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
     }
 
@@ -104,18 +113,5 @@ public class BlogFragment extends Fragment implements NavigationFragment {
                 }
             }
         });
-    }
-
-    @Override
-    public int getTitleResId() {
-        if (mFromLocal) {
-            return R.string.blog_local_title;
-        }
-        return R.string.blog_title;
-    }
-
-    @Override
-    public int getIconResId() {
-        return 0;
     }
 }

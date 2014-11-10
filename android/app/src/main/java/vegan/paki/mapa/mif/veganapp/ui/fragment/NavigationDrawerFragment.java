@@ -97,7 +97,7 @@ public class NavigationDrawerFragment extends Fragment {
         return mRecyclerView;
     }
 
-    public void setUp(List<NavigationFragment> titles, int fragmentId, DrawerLayout drawerLayout) {
+    public void setUp(List<NavigationItem> titles, int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -182,7 +182,7 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         //DrawerActivity act = (DrawerActivity) getActivity();
-        NavigationFragment item = mAdapter.getItem(position);
+        NavigationItem item = mAdapter.getItem(position);
         //act.switchDirectory(item);
         mCallbacks.onNavigationDrawerItemSelected(position);
         mTitle = getResources().getString(item.getTitleResId());

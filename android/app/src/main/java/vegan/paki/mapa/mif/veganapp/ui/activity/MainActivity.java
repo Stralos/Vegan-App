@@ -6,15 +6,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
-import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogSlidingFragment;
+import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogPagerFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationDrawerFragment;
-import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationFragment;
+import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationItem;
 
 
 public class MainActivity extends ThemedActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks{
@@ -23,37 +24,38 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private List<NavigationFragment> mNavFragments = new ArrayList<NavigationFragment>();
+    private List<NavigationItem> mNavFragments = new ArrayList<NavigationItem>();
     private List<Fragment> mFragments = new ArrayList<Fragment>();
+    private Toolbar mActionBarToolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("local", true);
-        BlogFragment blogFragment = new BlogFragment();
-        BlogFragment blogLocalFragment = new BlogFragment();
-        blogLocalFragment.setArguments(bundle);
-        BlogSlidingFragment blogSlidingFragment = new BlogSlidingFragment();
-        mFragments.add(blogFragment);
-        mFragments.add(blogLocalFragment);
-        mFragments.add(blogSlidingFragment);
-        mNavFragments.add(blogFragment);
-        mNavFragments.add(blogLocalFragment);
-        mNavFragments.add(blogSlidingFragment);
+        getActionBarToolbar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        BlogPagerFragment blogPagerFragment = new BlogPagerFragment();
+        mFragments.add(blogPagerFragment);
+        mNavFragments.add(blogPagerFragment);
         if (savedInstanceState == null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            BlogFragment fragment = new BlogFragment();
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
+            switchFragment(mFragments.get(0), true);
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationDrawerFragment mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(mNavFragments, R.id.navigation_drawer, mDrawerLayout);
 
+    }
+
+    protected Toolbar getActionBarToolbar() {
+        if (mActionBarToolbar == null) {
+            mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar);
+            if (mActionBarToolbar != null) {
+                setSupportActionBar(mActionBarToolbar);
+            }
+        }
+        return mActionBarToolbar;
     }
 
     @Override

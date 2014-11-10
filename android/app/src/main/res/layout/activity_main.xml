@@ -34,7 +34,7 @@
             android:layout_width="@dimen/navigation_drawer_width"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:name="vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationFragment"/>
+            android:name="vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationItem"/>
 
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

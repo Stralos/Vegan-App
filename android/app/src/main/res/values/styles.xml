@@ -3,7 +3,7 @@
     <style name="Theme.Vegan" parent="@style/VeganParent" />
 
     <!-- Base application theme. -->
-    <style name="VeganParent" parent="Theme.AppCompat.Light">
+    <style name="VeganParent" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="colorPrimary">@color/vegan_color</item>
         <item name="colorPrimaryDark">@color/vegan_color_darker</item>
@@ -21,12 +21,29 @@
 
         <item name="actionModeCloseDrawable">@drawable/ic_action_close</item>
         <item name="android:actionModeCloseDrawable">@drawable/ic_action_close</item>
+
+
+        <item name="actionBarInsetStart">@dimen/keyline_2</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
+
+    <style name="HeaderBar">
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- For Lollipop only -->
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+
 
     <style name="SlidingTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:textColor">#FFF</item>
@@ -50,12 +67,5 @@
     <style name="TranslucentActionBar" parent="">
         <item name="android:background">@color/translucent_actionbar_background</item>
     </style>
-
-    <style name="ActionBarThemeOverlay" parent="">
-        <item name="android:textColorPrimary">#fff</item>
-        <item name="colorControlNormal">?actionBarIconColor</item>
-        <item name="colorControlHighlight">#3fff</item>
-    </style>
-
 
 </resources>

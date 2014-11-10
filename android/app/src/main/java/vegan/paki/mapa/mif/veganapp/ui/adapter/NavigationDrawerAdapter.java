@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vegan.paki.mapa.mif.veganapp.R;
-import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationFragment;
+import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationItem;
 import vegan.paki.mapa.mif.veganapp.util.Utils;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ShortcutViewHolder> implements View.OnClickListener, View.OnLongClickListener {
@@ -23,13 +23,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         public abstract boolean onLongClick(int index);
     }
 
-    private List<NavigationFragment> mItems = new ArrayList<NavigationFragment>();
+    private List<NavigationItem> mItems = new ArrayList<NavigationItem>();
     private int mCheckedPos = -1;
     private ClickListener mListener;
     private int selectionColor;
     private int bodyText;
 
-    public NavigationDrawerAdapter(Context context, List<NavigationFragment> data, ClickListener listener) {
+    public NavigationDrawerAdapter(Context context, List<NavigationItem> data, ClickListener listener) {
         mItems = data;
         mListener = listener;
         selectionColor = Utils.resolveColor(context, R.attr.selection_text);
@@ -51,7 +51,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         return false;
     }
 
-    public void set(List<NavigationFragment> data) {
+    public void set(List<NavigationItem> data) {
         mItems.clear();
         mItems.addAll(data);
         notifyDataSetChanged();
@@ -62,7 +62,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         notifyDataSetChanged();
     }
 
-    public NavigationFragment getItem(int index) {
+    public NavigationItem getItem(int index) {
         return mItems.get(index);
     }
 
@@ -84,7 +84,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
     @Override
     public void onBindViewHolder(ShortcutViewHolder holder, int index) {
-        NavigationFragment item = mItems.get(index);
+        NavigationItem item = mItems.get(index);
         holder.title.setTag(index);
         holder.title.setOnClickListener(this);
         holder.title.setOnLongClickListener(this);

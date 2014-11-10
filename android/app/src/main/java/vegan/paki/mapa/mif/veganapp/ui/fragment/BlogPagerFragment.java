@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import vegan.paki.mapa.mif.veganapp.R;
-import vegan.paki.mapa.mif.veganapp.ui.adapter.SamplePagerAdapter;
+import vegan.paki.mapa.mif.veganapp.ui.adapter.BlogPagerAdapter;
 import vegan.paki.mapa.mif.veganapp.ui.view.SlidingTabLayout;
 
 /**
  * Created by Mantas on 11/6/2014.
  */
-public class BlogSlidingFragment extends Fragment implements NavigationFragment {
+public class BlogPagerFragment extends Fragment implements NavigationItem {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,20 +24,20 @@ public class BlogSlidingFragment extends Fragment implements NavigationFragment 
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new SamplePagerAdapter(getActivity()));
+
+        mViewPager.setAdapter(new BlogPagerAdapter(getChildFragmentManager()));
 
         SlidingTabLayout mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.tab_selected_strip));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.vegan_accent_color));
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mViewPager);
     }
 
     @Override
     public int getTitleResId() {
-        return R.string.sliding_title;
+        return R.string.blog_title;
     }
 
     @Override
