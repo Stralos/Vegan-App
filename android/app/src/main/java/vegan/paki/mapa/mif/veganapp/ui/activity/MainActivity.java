@@ -31,11 +31,17 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("local", true);
         BlogFragment blogFragment = new BlogFragment();
+        BlogFragment blogLocalFragment = new BlogFragment();
+        blogLocalFragment.setArguments(bundle);
         BlogSlidingFragment blogSlidingFragment = new BlogSlidingFragment();
         mFragments.add(blogFragment);
+        mFragments.add(blogLocalFragment);
         mFragments.add(blogSlidingFragment);
         mNavFragments.add(blogFragment);
+        mNavFragments.add(blogLocalFragment);
         mNavFragments.add(blogSlidingFragment);
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

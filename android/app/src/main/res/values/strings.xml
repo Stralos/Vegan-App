@@ -14,7 +14,8 @@
     <string name="drawer_closed">Drawer Closed</string>
     <string name="error">Error</string>
     <string name="sliding_title">Sliding</string>
-    <string name="blog_title">Blog/News</string>
+    <string name="blog_title">News</string>
     <string name="image_content_description">imageContentDescription</string>
+    <string name="blog_local_title">Favourite News</string>
 
 </resources>

@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
+import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.RxParseManager;
@@ -31,14 +34,20 @@ public class PostFragment extends Fragment {
     private TextView mContentView;
     private TextView mTitleView;
     private TextView mAuthorView;
+    private FloatingActionButton mFavouriteButton;
+    private PostDTO mPostDTO;
+    private boolean mFromLocal = false;
+    private boolean mFavourited;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mPostId = savedInstanceState.getString("objectId");
+            mFromLocal = savedInstanceState.getBoolean("local");
         } else if (getArguments() != null) {
             mPostId = getArguments().getString("objectId");
+            mFromLocal = getArguments().getBoolean("local");
         }
     }
 
@@ -46,6 +55,7 @@ public class PostFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("objectId", mPostId);
+        outState.putBoolean("local", mFromLocal);
     }
 
     @Override
@@ -57,9 +67,8 @@ public class PostFragment extends Fragment {
         mTitleView = (TextView) view.findViewById(R.id.title);
         mAuthorView = (TextView) view.findViewById(R.id.author);
         mContentView = (TextView) view.findViewById(R.id.content);
-
+        mFavouriteButton = (FloatingActionButton) view.findViewById(R.id.favourite);
         mPostSubscription = requestPost(mPostId);
-
         return view;
     }
 
@@ -69,10 +78,20 @@ public class PostFragment extends Fragment {
         super.onDestroyView();
     }
 
-    private Subscription requestPost(String postId) {
+    private Subscription requestPost(final String postId) {
         ParseQuery<PostDTO> query = ParseQuery.getQuery(PostDTO.class);
+        query.fromLocalDatastore();
         query.whereEqualTo("objectId", postId);
-        return RxParseManager.getInstance().getFirst(query).subscribe(new Action1<PostDTO>() {
+        mFromLocal = true;
+        return RxParseManager.getInstance().getFirst(query).onErrorResumeNext(new Func1<Throwable, Observable<? extends PostDTO>>() {
+            @Override
+            public Observable<? extends PostDTO> call(Throwable throwable) {
+                mFromLocal = false;
+                ParseQuery<PostDTO> query = ParseQuery.getQuery(PostDTO.class);
+                query.whereEqualTo("objectId", postId);
+                return RxParseManager.getInstance().getFirst(query);
+            }
+        }).subscribe(new Action1<PostDTO>() {
             @Override
             public void call(PostDTO postDTO) {
                 loadView(postDTO);
@@ -81,6 +100,7 @@ public class PostFragment extends Fragment {
     }
 
     private void loadView(PostDTO postDTO) {
+        mPostDTO = postDTO;
         ParseFile image = postDTO.getImage();
         if (image != null) {
             RxImageLoader.displayImage(image.getUrl(), mImageView).cache().subscribe();
@@ -91,6 +111,25 @@ public class PostFragment extends Fragment {
         mTitleView.setText(postDTO.getTitle());
         mAuthorView.setText(postDTO.getAuthor());
         mContentView.setText(postDTO.getContent());
+        if (mFromLocal) {
+            mFavouriteButton.setImageResource(R.drawable.ic_favorite);
+        } else {
+            mFavouriteButton.setImageResource(R.drawable.ic_action_content_new);
+        }
+        mFavourited = mFromLocal;
+        mFavouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mFavourited) {
+                    mFavouriteButton.setImageResource(R.drawable.ic_action_content_new);
+                    mPostDTO.unpinInBackground(mPostId);
+                } else {
+                    mFavouriteButton.setImageResource(R.drawable.ic_favorite);
+                    mPostDTO.pinInBackground(mPostId);
+                }
+                mFavourited = !mFavourited;
+            }
+        });
     }
 
 }

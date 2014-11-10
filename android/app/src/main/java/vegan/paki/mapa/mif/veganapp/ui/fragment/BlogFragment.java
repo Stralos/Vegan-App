@@ -32,6 +32,23 @@ public class BlogFragment extends Fragment implements NavigationFragment {
     private PostAdapter mPostAdapter;
     private List<PostDTO> mPosts = new ArrayList<PostDTO>();
     private Subscription mPostSubscription = Subscriptions.empty();
+    private boolean mFromLocal;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mFromLocal = savedInstanceState.getBoolean("local");
+        } else if (getArguments() != null) {
+            mFromLocal = getArguments().getBoolean("local");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("local", mFromLocal);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +63,9 @@ public class BlogFragment extends Fragment implements NavigationFragment {
                 if (getActivity() instanceof MainActivity) {
                     Bundle bundle = new Bundle();
                     bundle.putString("objectId", mPosts.get(index).getObjectId());
+                    if (mFromLocal) {
+                        bundle.putBoolean("local", true);
+                    }
                     PostFragment postFragment = new PostFragment();
                     postFragment.setArguments(bundle);
                     ((MainActivity) getActivity()).switchFragment(postFragment, false);
@@ -72,6 +92,9 @@ public class BlogFragment extends Fragment implements NavigationFragment {
 
     private Subscription requestPosts() {
         ParseQuery<PostDTO> query = ParseQuery.getQuery(PostDTO.class);
+        if (mFromLocal) {
+            query.fromLocalDatastore();
+        }
         return RxParseManager.getInstance().find(query).subscribe(new Action1<List<PostDTO>>() {
             @Override
             public void call(List<PostDTO> postDTOs) {
@@ -85,6 +108,9 @@ public class BlogFragment extends Fragment implements NavigationFragment {
 
     @Override
     public int getTitleResId() {
+        if (mFromLocal) {
+            return R.string.blog_local_title;
+        }
         return R.string.blog_title;
     }
 
