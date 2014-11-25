@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vegan.paki.mapa.mif.veganapp.R;
-import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogPagerFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationDrawerFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationItem;
@@ -68,7 +67,7 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Fragment fragment = new BlogFragment();
+        Fragment fragment = null;
         try {
             fragment = mFragments.get(position);
         } catch (Exception e) {}
