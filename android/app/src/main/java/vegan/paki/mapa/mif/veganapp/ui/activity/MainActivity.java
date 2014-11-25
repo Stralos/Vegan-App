@@ -77,6 +77,9 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
     }
 
     public void switchFragment(Fragment fragment, boolean clearBackStack) {
+        if (fragment == null) {
+            return;
+        }
         if (clearBackStack)
             getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
