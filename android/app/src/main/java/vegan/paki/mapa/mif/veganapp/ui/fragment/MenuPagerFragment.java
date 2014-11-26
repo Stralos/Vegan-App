@@ -19,6 +19,7 @@ import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.RxParseManager;
 import vegan.paki.mapa.mif.veganapp.core.model.dto.CategoryDTO;
+import vegan.paki.mapa.mif.veganapp.ui.activity.MainActivity;
 import vegan.paki.mapa.mif.veganapp.ui.adapter.MenuAdapter;
 
 /**
@@ -35,15 +36,21 @@ public class MenuPagerFragment extends Fragment implements NavigationItem {
 
         GridView gridView = (GridView) view.findViewById(R.id.menu_view);
 
-        requestPosts();
+
         menuAdapter = new MenuAdapter(getActivity(), mCategories);
+        requestPosts();
         gridView.setAdapter(menuAdapter);
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FoodFragment foodFragment = new FoodFragment();
+                Bundle bundle = new Bundle();
 
+                bundle.putString("objectId", mCategories.get(position).getObjectId());
+                foodFragment.setArguments(bundle);
+                ((MainActivity) getActivity()).switchFragment(foodFragment, false);
             }
         });
 
