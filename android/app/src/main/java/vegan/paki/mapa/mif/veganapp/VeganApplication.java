@@ -11,6 +11,7 @@ import com.parse.ParseObject;
 
 import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.core.model.dto.CategoryDTO;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.FoodDTO;
 import vegan.paki.mapa.mif.veganapp.core.model.dto.PostDTO;
 import vegan.paki.mapa.mif.veganapp.util.RxImageLoader;
 
@@ -64,6 +65,7 @@ public class VeganApplication extends Application {
 
         ParseObject.registerSubclass(PostDTO.class);
         ParseObject.registerSubclass(CategoryDTO.class);
+        ParseObject.registerSubclass(FoodDTO.class);
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "juQPiQJ3E9A4gVg69BjT7X0xfDwLeaTtyByOIhcf", "75lGmleK7sguI67H8XqimcwmACvkHN6hP91d9fwj");
         Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
