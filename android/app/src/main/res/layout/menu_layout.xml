@@ -15,6 +15,7 @@
         android:verticalSpacing="1dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
+
         />
 
 </RelativeLayout>

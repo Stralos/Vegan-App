@@ -1,6 +1,7 @@
 package vegan.paki.mapa.mif.veganapp.core.model.dto;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 /**
@@ -11,6 +12,9 @@ public class CategoryDTO extends ParseObject {
 
     public String getName() {
         return getString("name");
+    }
+    public ParseFile getImage() {
+        return getParseFile("image");
     }
 
 }

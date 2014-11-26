@@ -8,7 +8,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscription;
+import rx.functions.Action1;
+import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.R;
+import vegan.paki.mapa.mif.veganapp.RxParseManager;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.CategoryDTO;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.PostDTO;
 import vegan.paki.mapa.mif.veganapp.ui.adapter.MenuAdapter;
 
 /**
@@ -16,12 +27,20 @@ import vegan.paki.mapa.mif.veganapp.ui.adapter.MenuAdapter;
  */
 public class MenuPagerFragment extends Fragment implements NavigationItem {
 
+    private List<CategoryDTO> mCategories = new ArrayList<CategoryDTO>();
+    MenuAdapter menuAdapter;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_layout, container, false);
 
         GridView gridView = (GridView) view.findViewById(R.id.menu_view);
-        gridView.setAdapter(new MenuAdapter(getActivity()));
+
+        requestPosts();
+
+        gridView.setAdapter(menuAdapter = new MenuAdapter(getActivity(), mCategories));
+
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -30,6 +49,20 @@ public class MenuPagerFragment extends Fragment implements NavigationItem {
         });
 
         return view;
+    }
+
+
+    private Subscription requestPosts() {
+        ParseQuery<CategoryDTO> query = ParseQuery.getQuery(CategoryDTO.class);
+
+        return RxParseManager.getInstance().find(query).subscribe(new Action1<List<CategoryDTO>>() {
+            @Override
+            public void call(List<CategoryDTO> categoryDTO) {
+                mCategories = categoryDTO;
+                Timber.d(mCategories.size() + "");
+                menuAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
