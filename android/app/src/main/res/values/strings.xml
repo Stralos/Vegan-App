@@ -17,5 +17,6 @@
     <string name="blog_title">News</string>
     <string name="image_content_description">imageContentDescription</string>
     <string name="blog_local_title">Favourite News</string>
+    <string name="menu_navigation_drawer">Recipes</string>
 
 </resources>
