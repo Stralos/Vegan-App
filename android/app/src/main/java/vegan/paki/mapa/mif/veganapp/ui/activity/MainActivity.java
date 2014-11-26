@@ -14,6 +14,7 @@ import java.util.List;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogPagerFragment;
+import vegan.paki.mapa.mif.veganapp.ui.fragment.MenuPagerFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationDrawerFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.NavigationItem;
 
@@ -28,6 +29,18 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private Toolbar mActionBarToolbar;
 
+    private void addToFragments(Fragment fragment, NavigationItem navigationItem){
+        mFragments.add(fragment);
+        mNavFragments.add(navigationItem);
+    }
+
+    private void fragmentInitialization(){
+        BlogPagerFragment blogPagerFragment = new BlogPagerFragment();
+        addToFragments(blogPagerFragment, blogPagerFragment);
+
+        MenuPagerFragment menuPagerFragment = new MenuPagerFragment();
+        addToFragments(menuPagerFragment, menuPagerFragment);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +48,9 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
         setContentView(R.layout.activity_drawer);
         getActionBarToolbar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        BlogPagerFragment blogPagerFragment = new BlogPagerFragment();
-        mFragments.add(blogPagerFragment);
-        mNavFragments.add(blogPagerFragment);
+
+        fragmentInitialization();
+
         if (savedInstanceState == null) {
             switchFragment(mFragments.get(0), true);
         }
