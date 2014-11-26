@@ -1,8 +1,7 @@
 package vegan.paki.mapa.mif.veganapp.ui.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,8 @@ import java.util.List;
 
 import rx.Subscription;
 import rx.functions.Action1;
-import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.RxParseManager;
-import vegan.paki.mapa.mif.veganapp.core.model.dto.CategoryDTO;
 import vegan.paki.mapa.mif.veganapp.core.model.dto.FoodDTO;
 import vegan.paki.mapa.mif.veganapp.ui.activity.MainActivity;
 import vegan.paki.mapa.mif.veganapp.ui.adapter.FoodAdapter;
@@ -27,7 +24,7 @@ import vegan.paki.mapa.mif.veganapp.ui.adapter.FoodAdapter;
 /**
  * Created by Panda on 11/26/2014.
  */
-public class FoodFragment extends android.support.v4.app.Fragment {
+public class FoodFragment extends Fragment {
     private String objectId;
     private FoodAdapter foodAdapter;
     private List<FoodDTO> mFoodList = new ArrayList<FoodDTO>();
