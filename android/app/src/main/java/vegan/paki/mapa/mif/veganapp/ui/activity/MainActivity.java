@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogPagerFragment;
@@ -81,6 +82,7 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        Timber.d("pos " + position);
         Fragment fragment = new BlogFragment();
         try {
             fragment = mFragments.get(position);
@@ -93,6 +95,7 @@ public class MainActivity extends ThemedActivity implements NavigationDrawerFrag
         if (fragment == null) {
             return;
         }
+        Timber.d("frag not null " + fragment.getClass().getSimpleName());
         if (clearBackStack)
             getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
