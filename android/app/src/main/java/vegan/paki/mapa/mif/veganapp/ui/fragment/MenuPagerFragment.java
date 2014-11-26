@@ -19,7 +19,6 @@ import timber.log.Timber;
 import vegan.paki.mapa.mif.veganapp.R;
 import vegan.paki.mapa.mif.veganapp.RxParseManager;
 import vegan.paki.mapa.mif.veganapp.core.model.dto.CategoryDTO;
-import vegan.paki.mapa.mif.veganapp.core.model.dto.PostDTO;
 import vegan.paki.mapa.mif.veganapp.ui.adapter.MenuAdapter;
 
 /**
@@ -37,8 +36,8 @@ public class MenuPagerFragment extends Fragment implements NavigationItem {
         GridView gridView = (GridView) view.findViewById(R.id.menu_view);
 
         requestPosts();
-
-        gridView.setAdapter(menuAdapter = new MenuAdapter(getActivity(), mCategories));
+        menuAdapter = new MenuAdapter(getActivity(), mCategories);
+        gridView.setAdapter(menuAdapter);
 
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -54,11 +53,11 @@ public class MenuPagerFragment extends Fragment implements NavigationItem {
 
     private Subscription requestPosts() {
         ParseQuery<CategoryDTO> query = ParseQuery.getQuery(CategoryDTO.class);
-
         return RxParseManager.getInstance().find(query).subscribe(new Action1<List<CategoryDTO>>() {
             @Override
             public void call(List<CategoryDTO> categoryDTO) {
-                mCategories = categoryDTO;
+                mCategories.clear();
+                mCategories.addAll(categoryDTO);
                 Timber.d(mCategories.size() + "");
                 menuAdapter.notifyDataSetChanged();
             }
