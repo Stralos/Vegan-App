@@ -24,15 +24,14 @@ public class BlogPagerFragment extends Fragment implements NavigationItem {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager.setAdapter(new BlogPagerAdapter(getChildFragmentManager()));
 
-        mViewPager.setAdapter(new BlogPagerAdapter(getChildFragmentManager()));
-
-        SlidingTabLayout mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.vegan_accent_color));
-        mSlidingTabLayout.setDistributeEvenly(true);
-        mSlidingTabLayout.setViewPager(mViewPager);
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        slidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
+        slidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.vegan_accent_color));
+        slidingTabLayout.setDistributeEvenly(true);
+        slidingTabLayout.setViewPager(viewPager);
     }
 
     @Override

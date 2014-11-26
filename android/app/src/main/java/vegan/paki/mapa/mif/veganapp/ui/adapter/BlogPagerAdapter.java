@@ -3,7 +3,7 @@ package vegan.paki.mapa.mif.veganapp.ui.adapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 
 import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
@@ -11,7 +11,7 @@ import vegan.paki.mapa.mif.veganapp.ui.fragment.BlogFragment;
 /**
  * Created by Mantas on 11/10/2014.
  */
-public class BlogPagerAdapter extends FragmentStatePagerAdapter {
+public class BlogPagerAdapter extends FragmentPagerAdapter {
 
     public BlogPagerAdapter(FragmentManager fm) {
         super(fm);
