@@ -80,6 +80,6 @@ public class FoodFragment extends Fragment {
                 foodAdapter.notifyDataSetChanged();
             }
         });
-    }
+}
 
 }

@@ -8,24 +8,54 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import vegan.paki.mapa.mif.veganapp.R;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
 
-/**
- * Created by Panda on 11/26/2014.
- */
+import rx.Subscription;
+import rx.functions.Action1;
+import vegan.paki.mapa.mif.veganapp.R;
+import vegan.paki.mapa.mif.veganapp.RxParseManager;
+import vegan.paki.mapa.mif.veganapp.core.model.dto.FoodDTO;
+import vegan.paki.mapa.mif.veganapp.util.RxImageLoader;
+
+
 public class DishFragment extends Fragment {
 
+    private String objectId;
+    private TextView mDishName;
+    private TextView mDishDescription;
+    private ImageView mImageView;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            objectId = getArguments().getString("objectId");
+        }else{
+            objectId = savedInstanceState.getString("objectId");
+        }
+    }
+
     private View initialiseView(View view){
-        TextView dishName = (TextView) view.findViewById(R.id.dish_name);
-        TextView dishDescription = (TextView) view.findViewById(R.id.how_to_dish);
-        ImageView imageView = (ImageView) view.findViewById(R.id.dish_image_view);
+        requestFood();
 
-        dishName.setText("SPAGETIOS!");
-        dishDescription.setText("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-
-
+        mDishName = (TextView) view.findViewById(R.id.dish_name);
+        mDishDescription = (TextView) view.findViewById(R.id.how_to_dish);
+        mImageView = (ImageView) view.findViewById(R.id.dish_image_view);
 
         return view;
+    }
+
+    private void loadView(FoodDTO foodDTO) {
+        mDishName.setText(foodDTO.getName());
+        mDishDescription.setText(foodDTO.getRecipe());
+        ParseFile image = foodDTO.getImage();
+        if (image != null) {
+            RxImageLoader.displayImage(image.getUrl(), mImageView).cache().subscribe();
+        } else {
+            RxImageLoader.displayImage("drawable://" + R.drawable.vegan_placeholder, mImageView).cache().subscribe();
+        }
+
     }
 
     @Override
@@ -34,4 +64,17 @@ public class DishFragment extends Fragment {
 
         return initialiseView(view);
     }
+
+    private Subscription requestFood() {
+        ParseQuery<FoodDTO> query = ParseQuery.getQuery(FoodDTO.class);
+        query.whereEqualTo("objectId", objectId);
+        return RxParseManager.getInstance().getFirst(query).subscribe(new Action1<FoodDTO>() {
+            @Override
+            public void call(FoodDTO foodDTO) {
+                loadView(foodDTO);
+            }
+        });
+    }
+
+
 }

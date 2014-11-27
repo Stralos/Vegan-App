@@ -20,5 +20,6 @@ public class FoodDTO extends ParseObject {
     public String getCategory() {
         return getString("category");
     }
+    public String getRecipe() {return getString("recipe"); }
 
 }
